@@ -1,0 +1,173 @@
+/* src/app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;700&family=League+Spartan:wght@300;400;700&display=swap');
+
+:root {
+  --gold: #D4AF37;
+  --gold-dim: #a8872a;
+  --bg: #0e0e0e;
+  --bg-soft: #161616;
+  --bg-mid: #1e1e1e;
+  --silver: #9a9a9a;
+  --white: #f5f5f0;
+  --border: #2a2a2a;
+  --border-gold: rgba(212, 175, 55, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--white);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Selection */
+::selection {
+  background: rgba(212, 175, 55, 0.2);
+  color: var(--gold);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.3);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* Focus visible */
+:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 3px;
+}
+
+@layer components {
+  /* ── Typography ── */
+  .heading-display {
+    @apply font-serif font-light tracking-[0.06em] uppercase leading-tight;
+  }
+
+  .heading-label {
+    @apply font-display font-bold tracking-luxe uppercase text-[0.6rem];
+  }
+
+  .text-muted {
+    @apply text-silver text-[0.7rem] leading-relaxed tracking-wide;
+  }
+
+  /* ── Gold line divider ── */
+  .gold-line {
+    @apply w-10 h-px bg-gold;
+  }
+
+  /* ── Section wrapper ── */
+  .section-inner {
+    @apply max-w-[1200px] mx-auto px-6;
+  }
+
+  /* ── Button ── */
+  .btn-primary {
+    @apply relative overflow-hidden border border-gold text-gold font-display 
+           text-[0.6rem] tracking-luxe uppercase px-10 py-4 cursor-pointer 
+           transition-colors duration-300 bg-transparent;
+  }
+  .btn-primary::before {
+    content: '';
+    @apply absolute inset-0 bg-gold scale-x-0 origin-left transition-transform duration-300;
+  }
+  .btn-primary:hover::before {
+    @apply scale-x-100;
+  }
+  .btn-primary:hover {
+    @apply text-black;
+  }
+  .btn-primary > span {
+    @apply relative z-10;
+  }
+
+  /* ── Card ── */
+  .collection-card {
+    @apply relative overflow-hidden bg-black-soft cursor-pointer aspect-[3/4];
+  }
+
+  .collection-card-img {
+    @apply w-full h-full object-cover transition-transform duration-[800ms] ease-silk;
+  }
+  .collection-card:hover .collection-card-img {
+    @apply scale-105;
+  }
+
+  .card-overlay {
+    @apply absolute inset-0 bg-card-gradient opacity-0 transition-opacity duration-400;
+  }
+  .collection-card:hover .card-overlay {
+    @apply opacity-100;
+  }
+
+  .card-info {
+    @apply absolute bottom-0 left-0 right-0 p-6 translate-y-2 opacity-0 transition-all duration-400;
+  }
+  .collection-card:hover .card-info {
+    @apply translate-y-0 opacity-100;
+  }
+
+  /* ── Form inputs ── */
+  .field-input {
+    @apply bg-transparent border-0 border-b border-border text-white font-sans 
+           text-sm py-2.5 w-full outline-none transition-colors duration-300
+           placeholder:text-silver/30 focus:border-b-gold;
+  }
+
+  .field-label {
+    @apply text-[0.5rem] tracking-[0.3em] uppercase text-silver;
+  }
+
+  /* ── Admin panel ── */
+  .admin-panel {
+    @apply bg-black-soft border border-border p-8;
+  }
+
+  .panel-heading {
+    @apply text-[0.55rem] tracking-[0.4em] uppercase text-gold mb-6 pb-4 border-b border-border;
+  }
+
+  /* ── Skeleton loader ── */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      rgba(42, 42, 42, 0.8) 0%,
+      rgba(62, 62, 62, 0.8) 50%,
+      rgba(42, 42, 42, 0.8) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s linear infinite;
+  }
+}
+
+/* Framer Motion page transitions override */
+.page-wrapper {
+  min-height: calc(100vh - 64px);
+}
